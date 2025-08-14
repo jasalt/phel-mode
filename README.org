@@ -1,15 +1,19 @@
-Interactive Phel development config influenced by Emacs Cider implemented using basic stdio communication (comint style) because nRepl for Phel is not ready yet. Emulates Emacs Lisp and Clojure editing functionalities for a more frugal yet still very usable Lisp environment hosted on PHP.
+Interactive Phel development config influenced by Emacs Cider implemented using basic stdio communication (comint style). Emulates Emacs Lisp and Clojure editing functionalities for a more frugal yet still very usable Lisp environment hosted on PHP.
 
 Implementation is a bit rough and some things are finding their place but it works fine for everyday programming tasks.
-
-Possibly re-worked in future with actual Cider compatibility, ref:
-- https://codeberg.org/jasalt/phel-nrepl (WIP)
-- https://docs.cider.mx/cider/platforms/overview.html
-- https://docs.cider.mx/cider/platforms/basilisp.html
 
 MisTTY is used as REPL session terminal which sometimes breaks a bit and needs to be restarted but mostly works. Setup is quite naive and MistTTy is "reserved" for Phel, there's probably some quirks when using it for different tasks on same Emacs instance.
 
 * TODO
+- Discard docker-compose.yml based REPL and test command configurations in favor of composer.json
+- TODO research usage with project.el and
+- TODO research https://github.com/licht1stein/babashka.el/blob/master/babashka.el
+
 See also TODO items in code.
-** TODO research usage with project.el and
-** TODO research https://github.com/licht1stein/babashka.el/blob/master/babashka.el
+
+** nRepl / Cider compatibility
+Support is work in progress and might provide alternative config for stdio REPL at some point possibly as config option or separate project. Stdio REPL is the only officially supported REPL for Phel as of now so it will probably be supported afterwards.
+
+- https://codeberg.org/jasalt/phel-nrepl (WIP)
+- https://docs.cider.mx/cider/platforms/overview.html
+- https://docs.cider.mx/cider/platforms/basilisp.html
