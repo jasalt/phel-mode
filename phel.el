@@ -133,26 +133,6 @@
     (insert code)
 	;;(print-buffer-to-messages "at input")
 
-	;; TODO remove most workarounds https://github.com/phel-lang/phel-lang/pull/820 fixes
-
-    ;; Remove (ns ...) form around require-statements
-	;; Workaround for https://github.com/phel-lang/phel-lang/issues/766
-	(goto-char (point-min))
-    (when (re-search-forward "^(ns\\s-+" nil t)
-	  (let ((start (match-beginning 0)))
-		;; Erase ending parenthesis
-		(goto-char start)
-		(forward-sexp)
-		(backward-char)
-		(delete-char 1)
-
-		;; Erase the ns-form line
-		(goto-char start)
-		(beginning-of-line)
-		(kill-line)))
-
-	;; (print-buffer-to-messages "after ns removal")
-
 	;; Remove comment forms, TODO does not take into account comment lines not
 	;; having newline right after comment symbol
 	(goto-char (point-min))
@@ -166,26 +146,6 @@
 	(goto-char (point-min))
     (while (re-search-forward "#.*$" nil t)
       (replace-match ""))
-
-	;; Convert :require-file to php/require_once (related to issue 766)
-    (goto-char (point-min))
-    (while (search-forward "(:require-file " nil t)
-      (replace-match "(php/require_once "))
-
-    ;; Convert :require to require (related to issue 766)
-    (goto-char (point-min))
-    (while (search-forward "(:require " nil t)
-      (replace-match "(require "))
-
-	;; .. same for :use
-    (goto-char (point-min))
-    (while (search-forward "(:use " nil t)
-      (replace-match "(use "))
-
-	;; Replace tab characters triggering shell auto-complete
-	;; (goto-char (point-min))
-    ;; (while (search-forward "\t" nil t)
-    ;;   (replace-match " "))
 
 	;; (print-buffer-to-messages "before removing whitespace")
 
